@@ -1,0 +1,52 @@
+1.의존성(dependency)
+  - 어떤 객체를 사용하는 것을 "의존한다"고 한다.
+  - 앱을 실행하려면 내가 만든 객체뿐 아니라 의존하는 객체도 필요하다.
+  - 라이브러리 의존성을 관리해 주는 도구 (Maven, Gradle)를
+	빌드 도구라고 한다.
+  
+2. 스프링 개발도구
+  - STS 3 : MVC개발을 기본으로 Boot 프로젝트도 개발가능
+  - STS 4 : Boot 프로젝트를 기본, MVC는 확장을 설치하면 개발 가능
+  - 스프링 MVC는 설정을 잡아야만 동작, 스프링 부트는 자동 설정을 수행 
+  - 예를 들어 스프링 시큐리티를 pom.xml에 추가하는 경우
+  	스프링 MVC는 추가만으로는 동작하지 않는다. 
+  	부트는 추가하면 자동설정되고 동작한다.
+  
+3. 의존성 설정
+ 	원래 스프링부트는 spring + JPA + Thymeleaf
+	=> > spring + MyBatis + JSP
+ 	
+  - Lombok 
+  - DevTools : 저장하면 재실행. 단 JSP 는 업데이트가 밀릴 수 있다
+			   => F5
+  - Oracle Driver : 자바에서 데이터베이스 접속해 코딩하는 표준 (JDBC)★
+  					DB회사들이 JDBC를 구현해서 제공해야 한다 => driver
+  - MyBatis : JDBC를 쉽게 해주는 프로그램 ( 간단하게 SQL을 실행할 수 있다)
+  				vs JPA(자바로 클래스를 만들면 SQL을 생성) 
+  - spring : 사용자 요청을 접수
+  
+4. DAO(Data Access Object)
+	- 데이터베이스와 연결해 SQL을 실행하는 클래스
+	- 순수 JDBC를 사용하면 자바 클래스로 만들어 @Repository에 스프링에 등록
+	- JDBC대신 마이바티스를 사용하면 인터페이스로 만들어서 @Mapper로 스프링에 등록
+	
+5. 스프링 프레임워크를 사용하는 이유
+	- DI (Dependency Injection) : 의존성 주입 컨테이너
+	  IoC (Inversion of Control) : 제어 역전 컨테이너
+	  	프로그래머가 아닌 스프링이 객체 생성 등의 제어 작업을 수행한다.
+		스프링이 객체를 생성해서 가지고 있다가 개발자가 요청하면 넣어준다.
+	- AOP : 로그인처럼 여기저기에서 필요한 작업 (횡단 관심)을
+			분리하여 부품화한다.
+			
+6. 스프링이 객체를 생성하는 방법
+   - 객체를 관리하는 것은 ApplicationContext, 줄여서 Context
+   - 객체를 생성하는 작업은 Component Scan
+   - Component Scan 의 작업 대상은 프로젝트롤 생성할 때
+   	 지정 (com.example.demo)
+   - Component Scan 어노테이션
+   	 @Component, @Controller, @Service, @Repository
+   	 
+7. 마이바티스 DAO 는 인터페이스이다.
+   - 객체 생성이 불가능하여 스프링이 관리할 수 없다.
+   - 마이바티스가 객체를 만들어서 (@Mapper)
+   	 ApplicationContext 에 등록하면 관리해준다.
